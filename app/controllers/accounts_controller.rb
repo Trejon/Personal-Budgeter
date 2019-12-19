@@ -2,8 +2,8 @@ class AccountsController < ApplicationController
   before_action :require_login
 
   def index
-      id = current_user.id
-      if @user = User.find_by_id(id)
+    id = current_user.id
+    if @user = User.find_by_id(id)
       @accounts = @user.accounts
     else
       redirect_to root_path
@@ -18,11 +18,11 @@ class AccountsController < ApplicationController
   end
 
   def new
-      @account = Account.new
+    @account = Account.new
   end
 
   def edit
-      @account = Account.find_by_id(params[:id])
+    @account = Account.find_by_id(params[:id])
   end
 
   def create

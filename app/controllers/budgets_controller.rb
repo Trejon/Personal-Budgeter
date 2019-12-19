@@ -23,7 +23,7 @@ class BudgetsController < ApplicationController
   end
 
   def edit
-      @budget = Budget.find_by_id(params[:id])
+    @budget = Budget.find_by_id(params[:id])
   end
 
   def create
