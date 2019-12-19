@@ -1,0 +1,26 @@
+<% if logged_in? %>
+<% if flash[:notice] %>
+   <div class="notice"><%= flash[:notice] %></div>
+ <% end %>
+<% if @account && @account.user_id == current_user.id %>
+  <h1><%= accounts_header(@user) %></h1>
+  <h2>Your current balance is $<%= number_with_delimiter('%.2f' %  @account.balance, :delimiter => ',') %>.</h2>
+  <h1>Hi <%= @account.user.name %>, these are your transactions for your <%= @account.name %> account:</h1>
+
+
+<% @account.transactions.each do |e| %>
+  <h1><%= e.description %></h1>
+  <h3>$<%= number_with_delimiter('%.2f' % e.price, :delimiter => ',') %></h3>
+
+  <%= link_to "Show Transaction", e %>
+  <%= link_to "Edit Transaction", edit_transaction_path(e) %>
+  <%= link_to "Delete", e, method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+<br>
+
+<p><%= link_to "Edit This Account", edit_account_path(@account) %></p>
+<% else %>
+<h1>You can only see your Accounts!</h1>
+<h1><%= link_to "Redirect To Your Accounts Here", user_accounts_path(current_user) %><br></h1>
+<% end  %>
+<% end %>
