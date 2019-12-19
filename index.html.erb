@@ -1,12 +1,8 @@
-<% if logged_in? %>
 <% if flash[:notice] %>
    <div class="notice"><%= flash[:notice] %></div>
  <% end %>
-<h1><%= accounts_header(@user) %></h1>
-  <% @user.accounts.each do |b| %>
-    <ul><%= render "account", account: b %></ul>
-
-  <% end %>
-  <p><%= link_to "Add New Account", new_user_account_path(current_user)%></p>
-<%= link_to "See All User Transactions", account_transactions_path(current_user) %>
+<h1><%= budgets_header(@user) %></h1>
+<% @budgets.each do |e| %>
+<ul><%= render "budget", budget: e %></ul>
 <% end %>
+<p><%= link_to "Add New Budget", new_user_budget_path(current_user) %></p>

@@ -1,0 +1,10 @@
+<div class="budget">
+  <h1><%= budget.name %></h1>
+  <h2><%= "You overspent on this budget." if budget.overspent %><h2>
+  <h2>Limit: $<%= '%.2f' % budget.limit %> remaining in this budget.</h2>
+  <h2>This budget ends on <%= budget.end.strftime("%A,  %B %e, %Y") %>.</h2>
+  <h3>Category: <%= budget.category %></h3>
+  <h4><%= link_to "Show This Budget", budget %></h4>
+  <h4><%= link_to "Edit This Budget", edit_budget_path(budget) %></h4>
+  <h4><%= link_to "Delete", budget, method: :delete, data: { confirm: "Are you sure?" } %></h4>
+</div><br>
