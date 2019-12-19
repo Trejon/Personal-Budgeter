@@ -36,7 +36,7 @@ class UsersController < ApplicationController
         render :edit
       end
     else
-      redirect_to '/'
+      redirect_to root_path
     end
   end
 
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   def destroy
     session.delete :user_id
-    redirect_to '/'
+    redirect_to root_path
   end
 
 private
