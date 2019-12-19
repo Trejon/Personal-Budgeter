@@ -1,0 +1,19 @@
+<% if logged_in? %>
+<h1>Welcome to Your Personal Budgeter Home</h1><br>
+<h3>Links</h3>
+<%= link_to "View Accounts", accounts_path %><br>
+<%= link_to "View Budgets", user_budgets_path(current_user) %><br>
+<%= link_to "Add Account", new_account_path%><br>
+<%= link_to "Add Budget", new_user_budget_path(current_user) %><br>
+<%= link_to "All User Transactions", account_transactions_path(current_user.accounts) %><br>
+<%= link_to "Add Transaction", new_account_transaction_path(current_accounts) %><br>
+
+<% else %>
+
+<% if !logged_in? %>
+<h2>Sign up or Log in in below</h2><br>
+<h2><%= link_to "Sign up", signup_path %></h2>
+<h2><%= link_to "Login", signin_path %></h2>
+<h2><%= link_to('Log in with Facebook!', '/auth/facebook') %></h2>
+<% end %>
+<% end %>
