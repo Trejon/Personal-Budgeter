@@ -1,8 +1,0 @@
-<div class="transaction">
-  <h1><%= transaction.description %> purchased for $<%= '%.2f' % transaction.price %></h1>
-  <h2>Purchased from the <%= transaction.account.name %> account using the <%= transaction.budget.name %> budget.</h2>
-  <h2><%= "This transaction was a necessity." if transaction.necessity %><h2>
-  <h5><%= link_to "Show This Transaction", transaction %></h5>
-  <h5><%= link_to "Edit This Transaction", edit_transaction_path(transaction) %></h5>
-  <h5><%= link_to "Delete", transaction, method: :delete, data: { confirm: "Are you sure?" } %></h5>
-</div><br>
