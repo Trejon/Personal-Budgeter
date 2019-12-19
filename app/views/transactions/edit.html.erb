@@ -1,1 +1,2 @@
 <%= render partial: "form", locals: {transaction: @transaction} %>
+<h2><%= link_to "Delete this transaction", @transaction, method: :delete, data: { confirm: "Are you sure?" } %></h2>

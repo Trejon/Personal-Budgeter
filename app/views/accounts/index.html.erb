@@ -9,7 +9,4 @@
   <% end %>
   <p><%= link_to "Add New Account", new_user_account_path(current_user)%></p>
 <%= link_to "See All User Transactions", account_transactions_path(current_user) %>
-  <% else %>
-  <h1>You must sign in to continue.</h1>
-  <%= link_to "Signin", signin_path %><br>
 <% end %>

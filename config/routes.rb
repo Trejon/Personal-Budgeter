@@ -5,13 +5,11 @@ Rails.application.routes.draw do
   resources :accounts, only: [:index, :create, :new]
   resources :transactions, only: [:index, :create, :new]
 
-  resources :users, except: [:index] do
+  resources :users, only: [:show, :create, :edit] do
     resources :budgets, shallow: true
-  end
-  resources :users, except: [:index] do
     resources :accounts, shallow: true
   end
-  resources :accounts do
+  resources :accounts, shallow: true do
     resources :transactions, shallow: true
   end
 

@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     if logged_in?
       @user = current_user
       @transactions = current_user.transactions
+      @accounts = current_user.accounts
     else
       redirect_to root_path
     end

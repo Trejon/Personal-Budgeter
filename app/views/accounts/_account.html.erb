@@ -1,5 +1,4 @@
 <div class="account">
-
   <h1>This is your <%= account.name %> account:</h1>
   <h3>Balance: $<%= number_with_delimiter('%.2f' % account.balance, :delimiter => ',') %></h3>
   <h2><%= "This is a credit account." if account.credit_account %></h2>

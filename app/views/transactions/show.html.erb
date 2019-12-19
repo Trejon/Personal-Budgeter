@@ -4,14 +4,13 @@
 
 <% if @transaction && @transaction.user_id == current_user.id %>
 <h1>Transaction: <%= @transaction.description %></h1>
-<%= "This transaction is a necessity." if @transaction.necessity %>
 <h2>Price: $<%= '%.2f' % @transaction.price %></h2>
-<h2>Date: <%= @transaction.date.strftime("%A,  %B %e, %Y") %></h2>
-<h2>Location: <%= @transaction.location %></h2>
+<h2>Completed on <%= @transaction.date.strftime("%A  %B %e, %Y")%> in <%= @transaction.location %>.</h2>
 <h2>Category: <%= @transaction.category %></h2>
 <h2>Budget: <%= @transaction.budget.name %></h2>
 <h2>Purchaser: <%= @transaction.user.name %></h2>
 <h2>From: <%= @transaction.account.name %> account</h2>
+<%= "This transaction is a necessity." if @transaction.necessity %>
 
 
 <p><%= link_to "Edit This Transaction", edit_transaction_path(@transaction) %></p><br>
