@@ -1,0 +1,18 @@
+<% if @account.errors.any? %>
+  <% @account.errors.full_messages.each do |msg| %>
+    <a class="error"><%= msg %></a>
+  <% end %>
+<% end %>
+
+<%= form_for @account do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :balance %>
+  <%= f.text_field :balance %><br>
+
+  <%= f.label :credit_account %>
+  <%= f.check_box :credit_account %><br>
+
+  <%= f.submit "Create Account" %>
+  <% end %>
