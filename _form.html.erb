@@ -1,36 +1,24 @@
-<% if @transaction.errors.any? %>
-  <% @transaction.errors.full_messages.each do |msg| %>
+<% if @budget.errors.any? %>
+  <% @budget.errors.full_messages.each do |msg| %>
     <a class="error"><%= msg %></a>
   <% end %>
 <% end %>
-<h1>New Transaction</h1>
-<h3>Must create account & budget options before transaction.</h3>
-<%= form_for(@transaction) do |f| %>
+  <h1>New Budget</h1>
+<%= form_for @budget do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
 
-  <%= f.label :description %>
-  <%= f.text_field :description %><br>
-
-  <%= f.label :date %>
-  <%= f.date_field :date %><br>
-
-  <%= f.label :price %>
-  <%= f.number_field :price %><br>
-
-  <%= f.label :location %>
-  <%= f.text_field :location %><br>
+  <%= f.label :limit %>
+  <%= f.number_field :limit %><br>
 
   <%= f.label :category %>
   <%= f.text_field :category %><br>
 
+  <%= f.label :start %>
+  <%= f.date_field :start %><br>
 
-  <%= f.label :account %>
-  <%= f.collection_select :account_id, current_user.accounts, :id, :name %><br>
+  <%= f.label :end %>
+  <%= f.date_field :end %><br>
 
-  <%= f.label :budget %>
-  <%= f.collection_select :budget_id, current_user.budgets, :id, :name %><br>
-
-  <%= f.label "Is this item a necessity?" %>
-  <%= f.check_box :necessity %><br>
-
-  <%= f.submit "Make this Transaction" %>
+  <%= f.submit "Create Budget" %>
   <% end %>

@@ -1,18 +1,2 @@
-<% if @user.errors.any? %>
-  <% @user.errors.full_messages.each do |msg| %>
-  <p class="error"><%= msg %></p>
-  <% end %>
-<% end %>
-
-<%= form_with model: @user, local: true do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br>
-
-  <%= f.label :username %>
-  <%= f.text_field :username %><br>
-
-  <%= f.label :password %>
-  <%= f.text_field :password %><br>
-
-  <%= f.submit "Create User" %>
-  <% end %>
+<%= render partial: "form", locals: {budget: @budget} %>
+<h2><%= link_to "Delete this budget", @budget, method: :delete, data: { confirm: "Are you sure?" } %></h2>

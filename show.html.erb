@@ -1,21 +1,17 @@
 <% if flash[:notice] %>
    <div class="notice"><%= flash[:notice] %></div>
  <% end %>
-<h1><%= users_header(@user) %></h1>
-<h2>Your current balance including your credit accounts is $<%= number_with_delimiter('%.2f' % current_user.total_balance, :delimiter => ',') %>.</h2>.
+<% if @budget && @budget.user_id == current_user.id %>
+<h1>Budget Description: <%= @budget.name %></h1>
+<h1><%= "You've overspent on this budget." if @budget.overspent %><br><h1>
+<h1>Limit: $<%= '%.2f' % @budget.limit %><br></h1>
+<h3>Category: <%= @budget.category %><br></h3>
+<h3>Start: <%= @budget.start.strftime("%A,  %B %e, %Y") %></h3>
+<h3>End: <%= @budget.end.strftime("%A,  %B %e, %Y") %></h3><br>
 
-<h1><%= link_to "Your Transactions:", account_transactions_path(current_user) %></h1>
-<h2><% @transactions.each do |transaction| %></h2>
-<%= link_to transaction.description, transaction_path(transaction) %> - $<%= number_with_delimiter('%.2f' % transaction.price, :delimiter => ',') %><br>
-<% end %>.
-
-<h1><%= link_to "Your Accounts:", user_accounts_path(@user) %></h1>
-<h2><% @user.accounts.each do |account| %></h2>
-<%= link_to account.name, account_path(@user) %> - $<%= number_with_delimiter('%.2f' % account.balance, :delimiter => ',') %><br>
-<% end %>.
-
-<h1><%= link_to "Your Budgets:", user_budgets_path(@user) %></h1>
-<h2><% @user.budgets.each do |budget| %></h2>
-<%= link_to budget.name, budget_path(budget) %> - $<%= '%.2f' % budget.limit %> remaining here<br>
-<% end %>
-<p><%= link_to "Edit Your User Profile", edit_user_path(@user)%></p>
+  <p><%= link_to "Edit Budget", edit_budget_path(@budget) %><br></p>
+  <h2><%= link_to "New Budget", new_budget_path(@budget) %><br></h2>
+<% else %>
+<h1>You can only see your Budgets!</h1>
+<h1><%= link_to "Redirect To Your Budgets Here", user_budgets_path(current_user) %><br></h1>
+<% end  %>
