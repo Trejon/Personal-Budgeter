@@ -1,0 +1,11 @@
+<% if logged_in? %>
+<% if flash[:notice] %>
+   <div class="notice"><%= flash[:notice] %></div>
+ <% end %>
+
+<h1><%= transactions_header(@user) %></h1>
+<% end %>
+<% @user.transactions.each do |e| %>
+<ul><%= render "transaction", transaction: e %></ul>
+<% end %>
+<p><%= link_to "Add New Transaction", new_account_transaction_path(current_user) %></p>
