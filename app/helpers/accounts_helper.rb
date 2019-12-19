@@ -6,6 +6,4 @@ module AccountsHelper
       "#{@account.name}'s account:"
      end
    end
-
-
 end
