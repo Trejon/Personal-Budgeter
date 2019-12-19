@@ -1,0 +1,21 @@
+<h1>Sign In here:<h2>
+  <% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+      <p class="error"><%= msg %></p>
+    <% end %>
+  <% end %>
+
+  <%= form_for @user, url: '/signin' do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :password %>
+    <%= f.password_field :password, :id => 'password' %>
+
+  <%= f.submit "Sign In" %>
+
+
+
+  <% end %>
+
+<h2><%= link_to('Log in with Facebook', '/auth/facebook') %></h2>
+<h2><%= link_to "Sign Up", signup_path %></h2>

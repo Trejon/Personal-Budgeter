@@ -1,0 +1,23 @@
+<% if logged_in? %>
+<% if flash[:notice] %>
+   <div class="notice"><%= flash[:notice] %></div>
+ <% end %>
+
+  <h1><%= transactions_header(@user) %></h1>
+<% current_user.transactions.each do |e| %>
+<div class="transaction">
+   <h1><%= e.description %></h1>
+   <h3>Price: $<%= number_with_delimiter('%.2f' % e.price, :delimiter => ',') %></h3>
+   <h3>Purchased: <%= e.date.strftime("%A,  %B %e, %Y")%>. From the <%= link_to e.account.name, account_path(e.account) %> account.<br></h3>
+
+   <h4><%= link_to "Show Transaction", e %></h4>
+   <h4><%= link_to "Edit Transaction", edit_transaction_path(e) %></h4>
+   <h4><%= link_to "Delete", e, method: :delete, data: { confirm: "Are you sure?" } %></h4>
+   </div><br>
+ <% end %>
+ <p><%= link_to "Add New Transaction", new_account_transaction_path(current_user) %></p>
+
+  <% else %>
+  You must sign in to continue.
+  <%= link_to "Signin", signin_path %><br>
+<% end %>

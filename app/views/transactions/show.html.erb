@@ -1,0 +1,23 @@
+<% if flash[:notice] %>
+   <div class="notice"><%= flash[:notice] %></div>
+ <% end %>
+
+<% if @transaction && @transaction.user_id == current_user.id %>
+<h1>Transaction: <%= @transaction.description %></h1>
+<%= "This transaction is a necessity." if @transaction.necessity %>
+<h2>Price: $<%= '%.2f' % @transaction.price %></h2>
+<h2>Date: <%= @transaction.date.strftime("%A,  %B %e, %Y") %></h2>
+<h2>Location: <%= @transaction.location %></h2>
+<h2>Category: <%= @transaction.category %></h2>
+<h2>Budget: <%= @transaction.budget.name %></h2>
+<h2>Purchaser: <%= @transaction.user.name %></h2>
+<h2>From: <%= @transaction.account.name %> account</h2>
+
+
+<p><%= link_to "Edit This Transaction", edit_transaction_path(@transaction) %></p><br>
+<%= link_to "Add Transaction", new_transaction_path %><br>
+
+<% else %>
+<h1>You can only see your transactions!</h1>
+<h1><%= link_to "Redirect To Your Transactions Here", account_transactions_path(current_user) %><br></h1>
+<% end  %>

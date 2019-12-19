@@ -1,0 +1,8 @@
+<% if flash[:notice] %>
+   <div class="notice"><%= flash[:notice] %></div>
+ <% end %>
+<h1><%= budgets_header(@user) %></h1>
+<% @budgets.each do |e| %>
+<ul><%= render "budget", budget: e %></ul>
+<% end %>
+<p><%= link_to "Add New Budget", new_user_budget_path(current_user) %></p>
