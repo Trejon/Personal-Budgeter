@@ -30,11 +30,11 @@ class UsersController < ApplicationController
     if logged_in?
       @user = User.find_by(id: params[:id])
       @user.update(user_params)
-      if @user.save
-        redirect_to user_path(@user)
-      else
-        render :edit
-      end
+    if @user.save
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
     else
       redirect_to root_path
     end

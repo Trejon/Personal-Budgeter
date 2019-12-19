@@ -4,16 +4,16 @@ class TransactionsController < ApplicationController
   def new
     if logged_in?
       id = params[:account_id]
-      id && @account = Account.find_by_id(id)
-        @transaction = Transaction.new
-      else
-        redirect_to root_path
-      end
+      @account = Account.find_by_id(id)
+      @transaction = Transaction.new
+    else
+      redirect_to root_path
+    end
   end
 
   def index
-      id = current_user.id
-      if id && @user = User.find_by_id(id)
+    id = current_user.id
+    if id && @user = User.find_by_id(id)
       @accounts = @user.accounts
       @transactions = @user.transactions
     else
@@ -29,19 +29,18 @@ class TransactionsController < ApplicationController
       @transaction = Transaction.find_by_id(params[:id])
   end
 
-def create
-  @user = current_user
-  id = params[:transaction][:account_id]
-  @account = Account.find_by_id(id)
-  @transaction = @account.transactions.build(transaction_params.merge(user_id: @user.id))
-  if @transaction.save
-    redirect_to transaction_path(@transaction), notice:@transaction.make_transaction
-else
-    render :new, notice: "#{@transaction.description} was not made."
-    @transaction = Transaction.create(transaction_params)
+  def create
+    @user = current_user
+    id = params[:transaction][:account_id]
+    @account = Account.find_by_id(id)
+    @transaction = @account.transactions.build(transaction_params.merge(user_id: @user.id))
+    if @transaction.save
+      redirect_to transaction_path(@transaction), notice:@transaction.make_transaction
+    else
+      render :new, notice: "#{@transaction.description} was not made."
+      @transaction = Transaction.create(transaction_params)
+    end
   end
-end
-
 
   def update
     @transaction = Transaction.find_by_id(params[:id])
