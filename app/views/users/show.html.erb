@@ -1,6 +1,9 @@
 <% if flash[:notice] %>
    <div class="notice"><%= flash[:notice] %></div>
  <% end %>
+
+<h1><%= users_header(@user) %></h1>
+<h2>Your current balance including your credit accounts is $<%= number_with_delimiter('%.2f' % current_user.total_balance, :delimiter => ',') %>.</h2>.
 <h1 class="item"><%= users_header(@user) %></h1>
 <h2 class="bal">Your current balance including your credit accounts is $<%= number_with_delimiter('%.2f' % current_user.total_balance, :delimiter => ',') %>.</h2>
 
@@ -8,17 +11,22 @@
 
 <h1 class="item"><%= link_to "Your Transactions:", account_transactions_path(current_user) %></h1>
 <h2><% @transactions.each do |transaction| %></h2>
+<%= link_to transaction.description, transaction_path(transaction) %> - $<%= number_with_delimiter('%.2f' % transaction.price, :delimiter => ',') %><br>
+<% end %>.
 <%= link_to transaction.description, transaction_path(transaction) %> - $<%= number_with_delimiter('%.2f' % transaction.price, :delimiter => ',') %>
 <% end %><br/>
 
 <h1 class="item"><%= link_to "Your Accounts:", user_accounts_path(@user) %></h1>
 <h2><% @user.accounts.each do |account| %></h2>
 <%= link_to account.name, account_path(@user) %> - $<%= number_with_delimiter('%.2f' % account.balance, :delimiter => ',') %><br>
+<% end %>.
 <% end %><br/>
 
 <h1 class="item"><%= link_to "Your Budgets:", user_budgets_path(@user) %></h1>
 <h2><% @user.budgets.each do |budget| %></h2>
 <%= link_to budget.name, budget_path(budget) %> - $<%= '%.2f' % budget.limit %> remaining here<br>
+
+<% end %>
 <% end %><br/>
 </div>
 <p><%= link_to "Edit Your User Profile", edit_user_path(@user)%></p>
