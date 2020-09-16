@@ -1,5 +1,5 @@
 class BudgetsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, :get_budget
 
   def index
     id = current_user
@@ -11,7 +11,6 @@ class BudgetsController < ApplicationController
   end
 
   def show
-    @budget = Budget.find_by_id(params[:id])
   end
 
   def new
@@ -23,7 +22,6 @@ class BudgetsController < ApplicationController
   end
 
   def edit
-      @budget = Budget.find_by_id(params[:id])
   end
 
   def create
@@ -37,7 +35,6 @@ class BudgetsController < ApplicationController
   end
 
   def update
-    @budget = Budget.find_by_id(params[:id])
     if @budget.update(budget_params)
       redirect_to budget_path(@budget)
     else
@@ -46,7 +43,6 @@ class BudgetsController < ApplicationController
   end
 
   def destroy
-    @budget = Budget.find_by_id(params[:id])
     @budget.delete
     redirect_to budgets_path
   end
@@ -54,10 +50,10 @@ class BudgetsController < ApplicationController
   private
 
   def budget_params
-    params.require(:budget).permit(:name, :limit, :category, :start, :end, :user_id, :user_name)
+    params.require(:budget).permit(:name, :limit, :category, :start, :end, :user_name)
   end
 
-  def set_budget
+  def get_budget
     @budget = Budget.find_by_id(params[:id])
   end
 end

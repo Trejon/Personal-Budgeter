@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, :get_account
 
   def index
       id = current_user.id
@@ -11,18 +11,16 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @account = Account.find_by_id(params[:id])
     if @account
       @transactions = @account.transactions
     end
   end
 
   def new
-      @account = Account.new
+    @account = Account.new
   end
 
   def edit
-      @account = Account.find_by_id(params[:id])
   end
 
   def create
@@ -36,7 +34,6 @@ class AccountsController < ApplicationController
   end
 
   def update
-    @account = Account.find_by_id(params[:id])
     if @account.update(account_params)
       redirect_to account_path(@account)
     else
@@ -53,10 +50,10 @@ class AccountsController < ApplicationController
   private
 
   def account_params
-    params.require(:account).permit(:name, :credit_account, :debit_account, :balance, :user_name, :transaction_id)
+    params.require(:account).permit(:name, :credit_account, :balance, :user_name)
   end
 
-  def set_account
-    @account = Account.find_by_id(params[:user_id]) if params[:user_id]
+  def get_account
+    @account = Account.find_by_id(params[:id])
   end
 end

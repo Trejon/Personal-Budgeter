@@ -7,9 +7,10 @@ class Transaction < ApplicationRecord
   validates :description, presence: true
   validate :account_balance_is_greater
   scope :necessity, -> { where(necessity: true) }
+  # before_validation :make_transaction
 
   def account_balance_is_greater
-    unless self.account.balance.to_f > self.price.to_f
+    if self.account.balance < self.price
       self.errors.add :account, "balance must be greater than transaction total"
     end
   end
@@ -28,14 +29,6 @@ class Transaction < ApplicationRecord
 
   def user_name
     self.user ? self.user.name : nil
-  end
-
-  def budget_name=(name)
-    self.budget = Budget.find_or_create_by(name: name)
-  end
-
-  def budget_name
-    self.budget ? self.budget.name : nil
   end
 
   def make_transaction

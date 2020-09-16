@@ -1,24 +1,26 @@
-# README
+# Personal Budgeter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Personal Budgeter is a Ruby on Rails application for tracking user finances.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+To install Personal Budgeter, fork the repo and run bundle install. After installing the gems, run rails server to get the application up and running. Now in your browser visit 'http://localhost:3000' and the application should be live.
 
-* System dependencies
+```bash
+git clone <repo credentials>
+cd into folder 
+bundle install
+rails server
+```
 
-* Configuration
+## Usage
 
-* Database creation
 
-* Database initialization
+Create an account or visit the db/seeds.rb file to access existing user credentials for login. You can now create accounts, transactions, and set budgets.
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-* Deployment instructions
-
-* ...
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
